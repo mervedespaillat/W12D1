@@ -35,9 +35,9 @@ class Pokemon < ApplicationRecord
   ].sort.freeze
 
 	validates :image_url, presence: true
-	validates :captured, inclusion: [true, false]
-	validates :name, length: { in: 3..255 }, uniqueness: { messages: "For '%{model}', '%{attribute}' '%{value}' is already in use" }
-	validates :number, uniqueness: { messages: "For '%{model}', pokemon '%{attribute}' '%{value}' is already taken by another pokemon" },
+	validates :captured, inclusion: {in: [true, false], message: "Captured must be true or false" }
+	validates :name, length: { in: 3..255 }, uniqueness: { message: "For '%{model}', '%{attribute}' '%{value}' is already in use" }
+	validates :number, uniqueness: { message: "For '%{model}', pokemon '%{attribute}' '%{value}' is already taken by another pokemon" },
 		numericality: { minimum: 1 }
 	validates :attack, :defense, numericality: { in: 0..100 }
 	validates :poke_type, inclusion: { in: TYPES, message: "'%{value}' is not a valid Pokemon type" }
